@@ -21,6 +21,7 @@ local.properties
 
 # Firebase
 firebase-debug.log
+app/google-services.json
 
 # Crashlytics/Analytics (se usar)
 *.hprof
