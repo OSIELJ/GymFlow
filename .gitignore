@@ -1,0 +1,27 @@
+# Android Studio
+*.iml
+.idea/
+.gradle/
+build/
+captures/
+.cxx/
+.externalNativeBuild/
+
+# Local configuration
+local.properties
+.DS_Store
+
+# IntelliJ / Android Studio specific
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Firebase
+firebase-debug.log
+
+# Crashlytics/Analytics (se usar)
+*.hprof
+*.log
