@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GymFlow</string>
+    <string name="welcome_message">Bem-vindo de volta!</string>
+    <string name="hint_email">insira seu e-mail:</string>
+    <string name="hint_password">insira sua senha:</string>
+    <string name="button_login">Entrar</string>
+    <string name="button_create_account">Criar conta</string>
 </resources>
