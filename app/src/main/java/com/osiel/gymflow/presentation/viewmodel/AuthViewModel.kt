@@ -42,4 +42,10 @@ class AuthViewModel(
     fun logout() = repository.logout()
 
     fun isUserLoggedIn(): Boolean = repository.isUserLoggedIn()
+
+
+    fun resetState() {
+        _state.value = AuthState.Idle
+    }
+
 }
