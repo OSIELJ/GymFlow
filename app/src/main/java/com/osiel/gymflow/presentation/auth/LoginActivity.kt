@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.osiel.gymflow.MainActivity
 import com.osiel.gymflow.databinding.ActivityLoginBinding
-import com.osiel.gymflow.presentation.home.HomeActivity
 import com.osiel.gymflow.presentation.viewmodel.AuthState
 import com.osiel.gymflow.presentation.viewmodel.AuthViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -28,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (authViewModel.isUserLoggedIn()) {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
         }
@@ -123,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
                     is AuthState.Success -> {
                         Toast.makeText(this@LoginActivity, "Login realizado!", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
 
