@@ -6,4 +6,9 @@
     <string name="hint_password">insira sua senha:</string>
     <string name="button_login">Entrar</string>
     <string name="button_create_account">Criar conta</string>
+    <string name="name_of_training">Nome do treino</string>
+    <string name="description_of_training">Descrição do treino</string>
+    <string name="default_date">04/08/2025</string>
+    <string name="workouts">Treinos</string>
+    <string name="get_out">Sair</string>
 </resources>

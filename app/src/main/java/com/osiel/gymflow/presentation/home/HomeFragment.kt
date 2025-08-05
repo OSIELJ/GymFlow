@@ -58,12 +58,12 @@ class HomeFragment : Fragment() {
                     val adapters = mutableListOf<androidx.recyclerview.widget.RecyclerView.Adapter<*>>()
 
                     if (userList.isNotEmpty()) {
-                        adapters.add(SectionHeaderAdapter("My Workouts"))
+                        adapters.add(SectionHeaderAdapter("Meus treinos"))
                         adapters.add(WorkoutAdapter(userList))
                     }
 
                     if (suggestedList.isNotEmpty()) {
-                        adapters.add(SectionHeaderAdapter("Suggested Workouts"))
+                        adapters.add(SectionHeaderAdapter("Sugestão de treinos"))
                         adapters.add(WorkoutAdapter(suggestedList))
                     }
 
