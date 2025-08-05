@@ -11,4 +11,17 @@
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/myWorkoutsFragment"
+        android:name="com.osiel.gymflow.presentation.myworkuts.MyWorkoutsFragment"
+        android:label="Meus Treinos"
+        tools:layout="@layout/fragment_my_workouts" />
+
+    <fragment
+        android:id="@+id/newWorkoutFragment"
+        android:name="com.osiel.gymflow.presentation.newworkout.NewWorkoutFragment"
+        android:label="Novo Treino"
+        tools:layout="@layout/fragment_new_workout" />
+
+
 </navigation>

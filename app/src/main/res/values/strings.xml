@@ -11,4 +11,9 @@
     <string name="default_date">04/08/2025</string>
     <string name="workouts">Treinos</string>
     <string name="get_out">Sair</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Início</string>
+    <string name="training">Treinos</string>
+    <string name="create_training">Criar treino</string>
 </resources>
