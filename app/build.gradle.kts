@@ -55,5 +55,6 @@ dependencies {
     // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.core)
-
+    // Recyclerview
+    implementation(libs.androidx.recyclerview)
 }
