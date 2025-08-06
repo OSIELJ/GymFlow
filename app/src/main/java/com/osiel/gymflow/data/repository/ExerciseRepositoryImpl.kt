@@ -93,4 +93,14 @@ class ExerciseRepositoryImpl(
             throw e
         }
     }
+
+    override suspend fun getExercisesForSuggestedWorkout(workoutId: String): List<Exercicio> {
+        return firestore.collection("suggested_workouts")
+            .document(workoutId)
+            .collection("exercises")
+            .get()
+            .await()
+            .map { it.toObject(Exercicio::class.java).copy(id = it.id) }
+    }
+
 }

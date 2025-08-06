@@ -8,4 +8,5 @@ interface ExerciseRepository {
     suspend fun createExercise(workoutId: String, name: String, obs: String, imageUri: Uri?): Result<Unit>
     suspend fun updateExercise(workoutId: String, exercise: Exercicio)
     suspend fun deleteExercise(workoutId: String, exerciseId: String)
+    suspend fun getExercisesForSuggestedWorkout(workoutId: String): List<Exercicio>
 }

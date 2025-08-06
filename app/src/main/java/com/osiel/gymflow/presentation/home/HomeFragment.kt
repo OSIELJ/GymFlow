@@ -1,6 +1,5 @@
 package com.osiel.gymflow.presentation.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
 import com.osiel.gymflow.R
 import com.osiel.gymflow.databinding.FragmentHomeBinding
 import com.osiel.gymflow.presentation.adapter.SectionHeaderAdapter
 import com.osiel.gymflow.presentation.adapter.WorkoutAdapter
-import com.osiel.gymflow.presentation.auth.LoginActivity
 import com.osiel.gymflow.presentation.viewmodel.AuthViewModel
 import com.osiel.gymflow.presentation.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -44,7 +42,6 @@ class HomeFragment : Fragment() {
             insets
         }
 
-
         observeWorkouts()
     }
 
@@ -58,7 +55,8 @@ class HomeFragment : Fragment() {
                     if (userList.isNotEmpty()) {
                         adapters.add(SectionHeaderAdapter("Meus treinos"))
                         adapters.add(WorkoutAdapter(userList) { treinoClicado ->
-                            workoutViewModel.selectWorkout(treinoClicado)
+                            // --- MUDANÇA: Chamar a nova função 'selectWorkout' com isSuggested = false ---
+                            workoutViewModel.selectWorkout(treinoClicado, isSuggested = false)
                             findNavController().navigate(R.id.action_homeFragment_to_workoutDetailFragment)
                         })
                     }
@@ -66,7 +64,7 @@ class HomeFragment : Fragment() {
                     if (suggestedList.isNotEmpty()) {
                         adapters.add(SectionHeaderAdapter("Sugestão de treinos"))
                         adapters.add(WorkoutAdapter(suggestedList) { treinoClicado ->
-                            workoutViewModel.selectWorkout(treinoClicado)
+                            workoutViewModel.selectWorkout(treinoClicado, isSuggested = true)
                             findNavController().navigate(R.id.action_homeFragment_to_workoutDetailFragment)
                         })
                     }
