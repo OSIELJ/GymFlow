@@ -58,4 +58,8 @@ dependencies {
     implementation(libs.koin.core)
     // Recyclerview
     implementation(libs.androidx.recyclerview)
+    // Coil
+    implementation(libs.coil)
+    // Storage
+    implementation(libs.firebase.storage)
 }
