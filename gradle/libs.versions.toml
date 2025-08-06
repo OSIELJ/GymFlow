@@ -1,5 +1,6 @@
 [versions]
 agp = "8.8.0"
+coil = "2.6.0"
 koinAndroid = "4.0.0"
 kotlin = "2.1.0"
 coreKtx = "1.16.0"
@@ -16,10 +17,12 @@ firebaseFirestore = "26.0.0"
 navigationFragment = "2.9.3"
 recyclerview = "1.4.0"
 navigationUiKtx = "2.9.3"
+firebaseStorage = "22.0.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -34,6 +37,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 
 
 [plugins]
