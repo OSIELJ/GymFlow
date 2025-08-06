@@ -4,9 +4,11 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.osiel.gymflow.domain.model.Exercicio
+import com.osiel.gymflow.domain.model.Treino
 import com.osiel.gymflow.domain.repository.ExerciseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 sealed class ExerciseState {
@@ -22,22 +24,29 @@ class ExerciseViewModel(
 ) : ViewModel() {
 
     private val _exercises = MutableStateFlow<List<Exercicio>>(emptyList())
-    val exercises: StateFlow<List<Exercicio>> = _exercises
+    val exercises: StateFlow<List<Exercicio>> = _exercises.asStateFlow()
 
     private val _state = MutableStateFlow<ExerciseState>(ExerciseState.Idle)
-    val state: StateFlow<ExerciseState> = _state
+    val state: StateFlow<ExerciseState> = _state.asStateFlow()
 
-    fun loadExercises(workoutId: String) {
+
+    fun loadExercises(workoutId: String, isSuggested: Boolean) {
         viewModelScope.launch {
             _state.value = ExerciseState.Loading
             try {
-                _exercises.value = repository.getExercisesForWorkout(workoutId)
+                val exercisesList = if (isSuggested) {
+                    repository.getExercisesForSuggestedWorkout(workoutId)
+                } else {
+                    repository.getExercisesForWorkout(workoutId)
+                }
+                _exercises.value = exercisesList
                 _state.value = ExerciseState.Idle
             } catch (e: Exception) {
                 _state.value = ExerciseState.Error("Erro ao carregar exercícios")
             }
         }
     }
+
 
     fun createExercise(workoutId: String, name: String, obs: String, imageUri: Uri?) {
         viewModelScope.launch {
@@ -48,7 +57,7 @@ class ExerciseViewModel(
             }
             val result = repository.createExercise(workoutId, name, obs, imageUri)
             result.onSuccess {
-                loadExercises(workoutId)
+                loadExercises(workoutId, isSuggested = false)
                 _state.value = ExerciseState.Success("Exercício adicionado com sucesso")
             }.onFailure { exception ->
                 _state.value = ExerciseState.Error(exception.message ?: "Erro ao adicionar exercício")
@@ -61,7 +70,7 @@ class ExerciseViewModel(
             _state.value = ExerciseState.Loading
             try {
                 repository.deleteExercise(workoutId, exerciseId)
-                loadExercises(workoutId)
+                loadExercises(workoutId, isSuggested = false)
                 _state.value = ExerciseState.Success("Exercício removido com sucesso")
             } catch (e: Exception) {
                 _state.value = ExerciseState.Error("Erro ao excluir exercício")
@@ -74,7 +83,7 @@ class ExerciseViewModel(
             _state.value = ExerciseState.Loading
             try {
                 repository.updateExercise(workoutId, exercise)
-                loadExercises(workoutId)
+                loadExercises(workoutId, isSuggested = false)
                 _state.value = ExerciseState.Success("Exercício atualizado")
             } catch (e: Exception) {
                 _state.value = ExerciseState.Error("Erro ao atualizar exercício")

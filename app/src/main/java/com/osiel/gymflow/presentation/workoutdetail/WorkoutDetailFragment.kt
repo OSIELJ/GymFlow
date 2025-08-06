@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -29,6 +28,7 @@ import com.osiel.gymflow.presentation.viewmodel.CrudWorkoutState
 import com.osiel.gymflow.presentation.viewmodel.CrudWorkoutViewModel
 import com.osiel.gymflow.presentation.viewmodel.ExerciseState
 import com.osiel.gymflow.presentation.viewmodel.ExerciseViewModel
+import com.osiel.gymflow.presentation.viewmodel.SelectedWorkout
 import com.osiel.gymflow.presentation.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -77,13 +77,20 @@ class WorkoutDetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             sharedWorkoutViewModel.selectedWorkout.collectLatest { selectedWorkout ->
-                if (selectedWorkout != null) {
-                    workout = selectedWorkout
-                    binding.toolbar.title = workout.nome
-                    binding.textWorkoutName.text = workout.nome
-                    binding.textWorkoutDescription.text = workout.descricao
-                    setupListeners()
-                    exerciseViewModel.loadExercises(workout.id)
+                when (selectedWorkout) {
+                    is SelectedWorkout.UserWorkout -> {
+                        workout = selectedWorkout.treino
+                        updateUiForWorkout(isSuggested = false)
+                        exerciseViewModel.loadExercises(workout.id, isSuggested = false)
+                    }
+                    is SelectedWorkout.SuggestedWorkout -> {
+                        workout = selectedWorkout.treino
+                        updateUiForWorkout(isSuggested = true)
+                        exerciseViewModel.loadExercises(workout.id, isSuggested = true)
+                    }
+                    is SelectedWorkout.None -> {
+
+                    }
                 }
             }
         }
@@ -91,6 +98,21 @@ class WorkoutDetailFragment : Fragment() {
         observeCrudViewModel()
         observeExercises()
         observeExerciseCrudState()
+    }
+
+
+    private fun updateUiForWorkout(isSuggested: Boolean) {
+        binding.toolbar.title = workout.nome
+        binding.textWorkoutName.text = workout.nome
+        binding.textWorkoutDescription.text = workout.descricao
+        val visibility = if (isSuggested) View.GONE else View.VISIBLE
+        binding.buttonEdit.visibility = visibility
+        binding.buttonDelete.visibility = visibility
+        binding.buttonAddExercise.visibility = visibility
+
+        if (!isSuggested) {
+            setupListeners()
+        }
     }
 
     private fun observeExercises() {
@@ -148,23 +170,18 @@ class WorkoutDetailFragment : Fragment() {
 
 
     private fun showEditExerciseDialog(exercise: Exercicio) {
-        selectedImageUri = null
-        dialogPreviewImage = null
-
         val dialogBinding = DialogAddExerciseBinding.inflate(layoutInflater)
-        dialogPreviewImage = dialogBinding.imagePreview
 
         dialogBinding.editExerciseName.setText(exercise.nome)
         dialogBinding.editExerciseObservation.setText(exercise.observacoes)
-        dialogPreviewImage?.load(exercise.imagemUrl) {
+        dialogBinding.imagePreview.load(exercise.imagemUrl) {
             placeholder(R.drawable.ic_placeholder_exercise)
             error(R.drawable.ic_placeholder_exercise)
         }
 
-
         dialogBinding.btnSelectImage.visibility = View.GONE
 
-        crudExerciseDialog = AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext())
             .setTitle("Editar Exercício")
             .setView(dialogBinding.root)
             .setPositiveButton("Salvar") { _, _ ->
