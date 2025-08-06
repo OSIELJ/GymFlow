@@ -20,4 +20,7 @@
     <string name="exercises">Exercícios</string>
     <string name="edit">Editar</string>
     <string name="delete">Excluir</string>
+    <string name="observations">Observações</string>
+    <string name="name_of_exercise">Nome do exercício</string>
+    <string name="create_exercise">Criar Exercício</string>
 </resources>
