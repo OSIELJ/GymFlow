@@ -37,4 +37,24 @@ class WorkoutRepositoryImpl(
             .await()
     }
 
+    override suspend fun updateWorkout(workout: Treino) {
+        val userId = auth.currentUser?.uid ?: throw Exception("User not authenticated")
+        firestore.collection("users")
+            .document(userId)
+            .collection("workouts")
+            .document(workout.id)
+            .set(workout)
+            .await()
+    }
+
+    override suspend fun deleteWorkout(workoutId: String) {
+        val userId = auth.currentUser?.uid ?: throw Exception("User not authenticated")
+        firestore.collection("users")
+            .document(userId)
+            .collection("workouts")
+            .document(workoutId)
+            .delete()
+            .await()
+    }
+
 }

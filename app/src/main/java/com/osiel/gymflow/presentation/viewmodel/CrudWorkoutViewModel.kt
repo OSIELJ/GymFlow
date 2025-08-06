@@ -23,6 +23,7 @@ class CrudWorkoutViewModel(
     private val _state = MutableStateFlow<CrudWorkoutState>(CrudWorkoutState.Idle)
     val state: StateFlow<CrudWorkoutState> = _state
 
+    // Create workout
     fun createWorkout(name: String, description: String) {
         if (name.isBlank()) {
             _state.value = CrudWorkoutState.Error("Nome não pode estar vazio")
@@ -48,8 +49,40 @@ class CrudWorkoutViewModel(
         }
     }
 
+    // Edit workout
+    fun updateWorkout(workout: Treino) {
+        if (workout.nome.isBlank()) {
+            _state.value = CrudWorkoutState.Error("Nome não pode estar vazio")
+            return
+        }
+
+        _state.value = CrudWorkoutState.Loading
+
+        viewModelScope.launch {
+            try {
+                repository.updateWorkout(workout)
+                _state.value = CrudWorkoutState.Success
+            } catch (e: Exception) {
+                _state.value = CrudWorkoutState.Error(e.message ?: "Erro ao atualizar")
+            }
+        }
+    }
+
+    // Delete workout
+    fun deleteWorkout(workoutId: String) {
+        _state.value = CrudWorkoutState.Loading
+
+        viewModelScope.launch {
+            try {
+                repository.deleteWorkout(workoutId)
+                _state.value = CrudWorkoutState.Success
+            } catch (e: Exception) {
+                _state.value = CrudWorkoutState.Error(e.message ?: "Erro ao excluir")
+            }
+        }
+    }
+
     fun resetState() {
         _state.value = CrudWorkoutState.Idle
     }
 }
-
