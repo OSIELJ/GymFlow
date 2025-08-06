@@ -18,6 +18,7 @@ import com.osiel.gymflow.presentation.viewmodel.AuthViewModel
 import com.osiel.gymflow.presentation.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -25,7 +26,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModel()
-    private val workoutViewModel: WorkoutViewModel by viewModel()
+    private val workoutViewModel: WorkoutViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
