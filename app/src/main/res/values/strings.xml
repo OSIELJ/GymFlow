@@ -17,4 +17,7 @@
     <string name="training">Treinos</string>
     <string name="create_training">Criar treino</string>
     <string name="novo_treino">Novo Treino</string>
+    <string name="exercises">Exercícios</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
 </resources>
