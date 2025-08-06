@@ -27,4 +27,14 @@ class WorkoutRepositoryImpl(
             .await()
             .map { it.toObject(Treino::class.java).copy(id = it.id) }
     }
+
+    override suspend fun createWorkout(workout: Treino) {
+        val userId = auth.currentUser?.uid ?: throw Exception("Usuário não autenticado")
+        firestore.collection("users")
+            .document(userId)
+            .collection("workouts")
+            .add(workout)
+            .await()
+    }
+
 }
