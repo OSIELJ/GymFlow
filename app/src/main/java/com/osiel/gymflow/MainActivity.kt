@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment,
-                R.id.myWorkoutsFragment,
                 R.id.newWorkoutFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
                 }
+                // Agora, apenas telas de "detalhes" esconderão a barra
                 else -> {
                     binding.bottomNavigation.visibility = View.GONE
                 }

@@ -1,0 +1,61 @@
+package com.osiel.gymflow.presentation.profile
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.osiel.gymflow.databinding.FragmentProfileBinding
+import com.osiel.gymflow.presentation.auth.LoginActivity
+import com.osiel.gymflow.presentation.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class ProfileFragment : Fragment() {
+
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+    private val authViewModel: AuthViewModel by viewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        NavigationUI.setupWithNavController(binding.toolbar, findNavController())
+        binding.toolbar.title = "Perfil"
+
+        setupListeners()
+        observeUser()
+    }
+
+    private fun setupListeners() {
+        binding.logoutButton.setOnClickListener {
+            authViewModel.logout()
+            requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
+            requireActivity().finishAffinity()
+        }
+    }
+
+    private fun observeUser() {
+        viewLifecycleOwner.lifecycleScope.launch {
+
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

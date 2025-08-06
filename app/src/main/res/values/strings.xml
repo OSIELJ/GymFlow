@@ -11,6 +11,7 @@
     <string name="default_date">04/08/2025</string>
     <string name="workouts">Treinos</string>
     <string name="get_out">Sair</string>
+    <string name="get_out_account">Sair da Conta</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start">Início</string>
@@ -23,4 +24,5 @@
     <string name="observations">Observações</string>
     <string name="name_of_exercise">Nome do exercício</string>
     <string name="create_exercise">Criar Exercício</string>
+    <string name="profile">Perfil</string>
 </resources>

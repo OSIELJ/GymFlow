@@ -44,11 +44,6 @@ class HomeFragment : Fragment() {
             insets
         }
 
-        binding.logoutButton.setOnClickListener {
-            authViewModel.logout()
-            requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
-            requireActivity().finish()
-        }
 
         observeWorkouts()
     }
