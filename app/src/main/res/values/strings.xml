@@ -16,4 +16,5 @@
     <string name="start">Início</string>
     <string name="training">Treinos</string>
     <string name="create_training">Criar treino</string>
+    <string name="novo_treino">Novo Treino</string>
 </resources>
