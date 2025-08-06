@@ -18,10 +18,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/myWorkoutsFragment"
-        android:name="com.osiel.gymflow.presentation.myworkuts.MyWorkoutsFragment"
+        android:id="@+id/profileFragment"
+        android:name="com.osiel.gymflow.presentation.profile.ProfileFragment"
         android:label="Meus Treinos"
-        tools:layout="@layout/fragment_my_workouts" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/newWorkoutFragment"

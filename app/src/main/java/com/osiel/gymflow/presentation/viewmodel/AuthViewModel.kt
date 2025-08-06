@@ -21,6 +21,7 @@ class AuthViewModel(
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
     val state: StateFlow<AuthState> get() = _state
 
+
     fun login(email: String, password: String) {
         _state.value = AuthState.Loading
         viewModelScope.launch {
