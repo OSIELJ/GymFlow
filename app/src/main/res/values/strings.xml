@@ -1,3 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GymFlow</string>
+    <string name="welcome_message">Bem-vindo de volta!</string>
+    <string name="hint_email">insira seu e-mail:</string>
+    <string name="hint_password">insira sua senha:</string>
+    <string name="button_login">Entrar</string>
+    <string name="button_create_account">Criar conta</string>
+    <string name="name_of_training">Nome do treino</string>
+    <string name="description_of_training">Descrição do treino</string>
+    <string name="default_date">04/08/2025</string>
+    <string name="workouts">Treinos</string>
+    <string name="get_out">Sair</string>
+    <string name="get_out_account">Sair da Conta</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Início</string>
+    <string name="training">Treinos</string>
+    <string name="create_training">Criar treino</string>
+    <string name="novo_treino">Novo Treino</string>
+    <string name="exercises">Exercícios</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="observations">Observações</string>
+    <string name="name_of_exercise">Nome do exercício</string>
+    <string name="create_exercise">Criar Exercício</string>
+    <string name="profile">Perfil</string>
 </resources>
