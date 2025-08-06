@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WorkoutAdapter(
-    private val workouts: List<Treino>
+    private val workouts: List<Treino>,
+    private val onItemClicked: (Treino) -> Unit
 ) : RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemWorkoutBinding) :
@@ -36,6 +37,9 @@ class WorkoutAdapter(
                 .format(training.data.toDate())
 
             workoutDateText.text = "Data: $formattedDate"
+        }
+        holder.itemView.setOnClickListener {
+            onItemClicked(training)
         }
     }
 }

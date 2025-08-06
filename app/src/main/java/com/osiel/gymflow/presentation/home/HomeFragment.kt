@@ -10,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import androidx.navigation.fragment.findNavController
+import com.osiel.gymflow.R
 import com.osiel.gymflow.databinding.FragmentHomeBinding
 import com.osiel.gymflow.presentation.adapter.SectionHeaderAdapter
 import com.osiel.gymflow.presentation.adapter.WorkoutAdapter
@@ -60,12 +62,18 @@ class HomeFragment : Fragment() {
 
                     if (userList.isNotEmpty()) {
                         adapters.add(SectionHeaderAdapter("Meus treinos"))
-                        adapters.add(WorkoutAdapter(userList))
+                        adapters.add(WorkoutAdapter(userList) { treinoClicado ->
+                            workoutViewModel.selectWorkout(treinoClicado)
+                            findNavController().navigate(R.id.action_homeFragment_to_workoutDetailFragment)
+                        })
                     }
 
                     if (suggestedList.isNotEmpty()) {
                         adapters.add(SectionHeaderAdapter("Sugestão de treinos"))
-                        adapters.add(WorkoutAdapter(suggestedList))
+                        adapters.add(WorkoutAdapter(suggestedList) { treinoClicado ->
+                            workoutViewModel.selectWorkout(treinoClicado)
+                            findNavController().navigate(R.id.action_homeFragment_to_workoutDetailFragment)
+                        })
                     }
 
                     binding.workoutRecycler.adapter = ConcatAdapter(adapters)

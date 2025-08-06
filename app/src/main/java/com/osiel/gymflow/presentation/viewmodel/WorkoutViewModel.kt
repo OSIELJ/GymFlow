@@ -6,6 +6,7 @@ import com.osiel.gymflow.domain.repository.WorkoutRepository
 import com.osiel.gymflow.domain.model.Treino
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class WorkoutViewModel(
@@ -17,6 +18,18 @@ class WorkoutViewModel(
 
     private val _suggestedWorkouts = MutableStateFlow<List<Treino>>(emptyList())
     val suggestedWorkouts: StateFlow<List<Treino>> = _suggestedWorkouts
+
+
+    private val _selectedWorkout = MutableStateFlow<Treino?>(null)
+    val selectedWorkout: StateFlow<Treino?> = _selectedWorkout.asStateFlow()
+
+    fun selectWorkout(workout: Treino) {
+        _selectedWorkout.value = workout
+    }
+
+    fun clearSelectedWorkout() {
+        _selectedWorkout.value = null
+    }
 
     init {
         loadWorkouts()

@@ -9,7 +9,13 @@
         android:id="@+id/homeFragment"
         android:name="com.osiel.gymflow.presentation.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_workoutDetailFragment"
+            app:destination="@id/workoutDetailFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/myWorkoutsFragment"
@@ -22,6 +28,12 @@
         android:name="com.osiel.gymflow.presentation.newworkout.NewWorkoutFragment"
         android:label="Novo Treino"
         tools:layout="@layout/fragment_new_workout" />
+
+    <fragment
+        android:id="@+id/workoutDetailFragment"
+        android:name="com.osiel.gymflow.presentation.workoutdetail.WorkoutDetailFragment"
+        android:label="Detalhes do Treino"
+        tools:layout="@layout/fragment_workout_detail" />
 
 
 </navigation>
